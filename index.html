@@ -1,11 +1,23 @@
 <h1>hello</h1>
-<script>document.addEventListener('keydown', function(event) {
-  if (event.key === 'F11') {
-    if (document.fullscreenElement) {
-      document.exitFullscreen();
-    } else {
-      document.documentElement.requestFullscreen();
+
+<script> document.addEventListener("DOMContentLoaded", function() {
+  var element = document.documentElement;
+  
+  function openFullscreen() {
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) { /* Firefox */
+      element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+      element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) { /* IE/Edge */
+      element.msRequestFullscreen();
     }
   }
+  
+  // Trigger fullscreen mode on click
+  document.addEventListener("click", function() {
+    openFullscreen();
+  });
 });
 </script>
